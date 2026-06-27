@@ -1,0 +1,16 @@
+# Overfitting run: a low-bias, high-variance model.
+# A fully grown decision tree memorises the training set (train accuracy
+# ~100%) but generalises poorly, producing a large train/val gap.
+run_name: overfit
+model:
+  type: decision_tree
+  params:
+    max_depth: null          # grow until pure -> memorises training data
+    min_samples_split: 2
+    min_samples_leaf: 1
+    random_state: 42
+data:
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+notes: "High variance: perfect train accuracy, large train/val gap."

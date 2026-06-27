@@ -1,0 +1,14 @@
+# Underfitting run: a high-bias, low-variance model.
+# A depth-2 decision tree cannot separate 10 digit classes, so BOTH the
+# training and validation accuracy stay low (classic underfitting).
+run_name: underfit
+model:
+  type: decision_tree
+  params:
+    max_depth: 2
+    random_state: 42
+data:
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+notes: "High bias: shallow tree, low train and val accuracy."

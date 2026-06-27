@@ -1,0 +1,19 @@
+# MNIST with RBF-SVM on a stratified 12k subsample. RBF-SVM is ~O(n^2), so it
+# is deliberately subsampled to stay tractable on CPU - a finding in itself:
+# the model that wins on tiny data does not scale to the full set.
+run_name: mnist_svm
+model:
+  type: svm
+  params:
+    C: 10.0
+    gamma: scale
+    kernel: rbf
+    probability: true
+    random_state: 42
+data:
+  dataset: mnist
+  subsample: 12000
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+notes: "MNIST subsample; RBF-SVM kept tractable by subsampling."

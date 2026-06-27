@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Cached datasets (e.g. MNIST fetched via OpenML)
+data/
+
+# Generated artifacts
+artifacts/
+models/
+reports/figures/
+*.joblib
+*.png
+!report/figures/.gitkeep
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Temp dumps
+_abstract_dump.json
+_tables_dump.json

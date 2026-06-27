@@ -1,0 +1,17 @@
+# Balanced run: a well-regularised RBF-kernel SVM.
+# Low bias and low variance: high training accuracy AND high validation
+# accuracy with only a small train/val gap (good generalisation).
+run_name: balanced
+model:
+  type: svm
+  params:
+    C: 10.0
+    gamma: scale
+    kernel: rbf
+    probability: true
+    random_state: 42
+data:
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+notes: "Good fit: small train/val gap, best validation accuracy."

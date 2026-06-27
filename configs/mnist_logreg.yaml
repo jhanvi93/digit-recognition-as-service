@@ -1,0 +1,16 @@
+# MNIST (70,000 x 784) with logistic regression. Linear models scale to the
+# full set on CPU, unlike RBF-SVM, so this is a realistic large-data champion.
+run_name: mnist_logreg
+model:
+  type: logistic_regression
+  params:
+    C: 1.0
+    max_iter: 200
+    random_state: 42
+data:
+  dataset: mnist
+  subsample: null          # use the full 70k set
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+notes: "Full MNIST, multinomial logistic regression."

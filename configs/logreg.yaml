@@ -1,0 +1,15 @@
+# Strong, well-regularised linear baseline. Scales far better than RBF-SVM
+# on large datasets, so it is a serious champion candidate on MNIST.
+run_name: logreg
+model:
+  type: logistic_regression
+  params:
+    C: 1.0
+    max_iter: 2000
+    random_state: 42
+data:
+  dataset: digits
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+notes: "Regularised multinomial logistic regression; cheap and scalable."

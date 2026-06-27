@@ -1,0 +1,15 @@
+# Small multi-layer perceptron: a neural-network candidate.
+run_name: mlp
+model:
+  type: mlp
+  params:
+    hidden_layer_sizes: [128]
+    alpha: 0.0001
+    max_iter: 300
+    random_state: 42
+data:
+  dataset: digits
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+notes: "Single hidden layer MLP; non-linear baseline."
