@@ -1,0 +1,24 @@
+# Serving image: exposes the FastAPI prediction service.
+FROM python:3.11-slim AS base
+
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH=/app/src \
+    MODEL_PATH=/app/models/balanced.joblib \
+    PORT=8000
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY src ./src
+# Models are produced by the training image / pipeline and mounted or copied in.
+COPY models ./models
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/livez')" || exit 1
+
+CMD ["python", "-m", "mlops_digit.serve"]

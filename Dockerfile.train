@@ -1,0 +1,17 @@
+# Training image: runs the three-model experiment and writes models + metrics.
+FROM python:3.11-slim AS base
+
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH=/app/src
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY src ./src
+COPY configs ./configs
+
+# Default: train all three runs and produce the under/overfitting analysis.
+CMD ["python", "-m", "mlops_digit.analyze"]

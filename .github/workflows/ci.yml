@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test-and-train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest
+
+      - name: Train models + under/overfitting analysis
+        run: python -m mlops_digit.analyze
+        env:
+          PYTHONPATH: src
+
+      - name: Latency benchmark
+        run: python -m mlops_digit.benchmark --iterations 300
+        env:
+          PYTHONPATH: src
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: digit-rec-artifacts
+          path: |
+            artifacts/**
+            reports/figures/**
+            models/**
